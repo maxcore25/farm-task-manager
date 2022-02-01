@@ -19,9 +19,19 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/api/todo")
+async def get_todo():
+    return 1
+
+
+@app.get("/api/todo{id}")
+async def get_todo_by_id(id):
+    return 1
+
+
+@app.post("/api/todo")
+async def post_todo(todo):
+    return 1
 
 
 if __name__ == '__main__':
