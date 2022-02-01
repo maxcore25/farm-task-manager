@@ -34,6 +34,16 @@ async def post_todo(todo):
     return 1
 
 
+@app.put("/api/todo{id}")
+async def put_todo(id, data):
+    return 1
+
+
+@app.delete("/api/todo{id}")
+async def delete_todo(id):
+    return 1
+
+
 if __name__ == '__main__':
     uvicorn.run(app, port=8000, host='127.0.0.1')
 
