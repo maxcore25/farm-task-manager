@@ -1,10 +1,9 @@
 from model import Todo
 import os
 from dotenv import load_dotenv
-
-# MongoDB driver
-import motor.motor_asyncio
+import pymongo
 
 load_dotenv()
 
-client = motor.motor_asyncio.AsyncIOMotorClient(os.getenv("MONGODB_URL"))
+client = pymongo.MongoClient(os.getenv("MONGODB_URL"))
+db = client.test
