@@ -59,8 +59,8 @@ async def put_todo(title: str, desc: str):
 
 
 @app.delete("/api/todo{title}", response_model=Todo)
-async def delete_todo(title):
-    response = await remove_todo(title)
+def delete_todo(title):
+    response = remove_todo(title)
     if response:
         return f'TODO item with title "{title}" removed'
     raise HTTPException(404, f'There is no TODO item with this title: {title}')
