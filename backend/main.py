@@ -1,10 +1,19 @@
-
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
 import uvicorn
 
 app = FastAPI()
+
+from database import (
+    fetch_one_todo,
+    fetch_all_todos,
+    create_todo,
+    update_todo,
+    remove_todo
+)
+
 origins = ['https://localhost:3000']
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
