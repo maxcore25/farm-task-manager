@@ -12,14 +12,14 @@ from model import Todo
 
 app = FastAPI()
 
-origins = ['https://localhost:3000']
+allowed = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=allowed,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=allowed,
+    allow_headers=allowed,
 )
 
 
@@ -30,13 +30,13 @@ def read_root():
 
 @app.get("/api/todo")
 async def get_todo():
-    response = await fetch_all_todos()
+    response = fetch_all_todos()
     return response
 
 
 @app.get("/api/todo{title}", response_model=Todo)
 async def get_todo_by_id(title):
-    response = await fetch_one_todo(title)
+    response = fetch_one_todo(title)
     if response:
         return response
     raise HTTPException(404, f'There is no TODO item with this title: {title}')
@@ -44,7 +44,7 @@ async def get_todo_by_id(title):
 
 @app.post("/api/todo", response_model=Todo)
 async def post_todo(todo: Todo):
-    response = await create_todo(todo.dict())
+    response = create_todo(todo.dict())
     if response:
         return response
     raise HTTPException(400, 'Something went wrong / Bad Request')
@@ -52,7 +52,7 @@ async def post_todo(todo: Todo):
 
 @app.put("/api/todo{title}", response_model=Todo)
 async def put_todo(title: str, desc: str):
-    response = await update_todo(title, desc)
+    response = update_todo(title, desc)
     if response:
         return response
     raise HTTPException(404, f'There is no TODO item with this title: {title}')
