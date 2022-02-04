@@ -13,7 +13,7 @@ export default function TodoItem(props) {
       <span style={{ fontWeight: 'bold, underline' }}>
         {props.todo.title}:{' '}
       </span>
-      {props.todo.descripTion}
+      {props.todo.description}
       <button
         onClick={() => deleteTodoHandler(props.todo.title)}
         className='btn btn-outline-danger my-2 mx-2'
