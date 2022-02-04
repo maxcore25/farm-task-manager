@@ -34,7 +34,7 @@ async def get_todo():
     return response
 
 
-@app.get("/api/todo{title}", response_model=Todo)
+@app.get("/api/todo/{title}", response_model=Todo)
 async def get_todo_by_id(title):
     response = fetch_one_todo(title)
     if response:
@@ -50,7 +50,7 @@ async def post_todo(todo: Todo):
     raise HTTPException(400, 'Something went wrong / Bad Request')
 
 
-@app.put("/api/todo{title}", response_model=Todo)
+@app.put("/api/todo/{title}", response_model=Todo)
 async def put_todo(title: str, desc: str):
     response = update_todo(title, desc)
     if response:
@@ -58,7 +58,7 @@ async def put_todo(title: str, desc: str):
     raise HTTPException(404, f'There is no TODO item with this title: {title}')
 
 
-@app.delete("/api/todo{title}", response_model=Todo)
+@app.delete("/api/todo/{title}", response_model=Todo)
 def delete_todo(title):
     response = remove_todo(title)
     if response:

@@ -13,13 +13,20 @@ function App() {
       .then(res => setTodoList(res.data));
   }, []);
 
+  const addTodoHandler = () => {
+    axios
+      .post('http://127.0.0.1:8000/api/todo', {
+        title,
+        description: desc,
+      })
+      .then(res => console.log(res));
+  };
+
   return (
     <div
       className='App list-group-item justify-content-center align-items-center mx-auto'
       style={{ width: 400, backgroundColor: 'white', marginTop: 15 }}>
-      <h1
-        className='card text-white bg-primary mb-1'
-        style={{ maxWidth: '20rem' }}>
+      <h1 className='card text-white bg-primary mb-1' style={{ width: '100%' }}>
         Task Manager
       </h1>
       <h6 className='card text-white bg-primary mb-3'>
@@ -32,15 +39,18 @@ function App() {
             type='text'
             className='mb-2 form-control titleIn'
             placeholder='Title'
+            onChange={e => setTitle(e.target.value)}
           />
           <input
             type='text'
             className='mb-2 form-control desIn'
             placeholder='Description'
+            onChange={e => setDesc(e.target.value)}
           />
           <button
             className='btn btn-outline-primary mx-2 mb-3'
-            style={{ borderRadius: 50, fontWeight: 'bold' }}>
+            style={{ borderRadius: 50, fontWeight: 'bold' }}
+            onClick={addTodoHandler}>
             Add Task
           </button>
         </span>
